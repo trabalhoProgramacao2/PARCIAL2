@@ -1,0 +1,115 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>Pratica 2</title> 
+    <meta http-equiv="Content-Type" 
+    	content="text/html; charset=UTF-8" />
+    <script>
+        function ExibirInserir(){
+            document.getElementById("inserir").style.display ="";
+            document.getElementById("listar").style.display ="none";
+        }
+        
+        function ExibirLista(){
+            document.getElementById("inserir").style.display ="none";
+            document.getElementById("listar").style.display ="";
+        }
+        
+    </script>
+</head>
+<body>
+	<div th:each="erro : ${erros}">
+		<p th:text="${erro}"></p>
+	</div>
+
+    
+    
+    <div id="listar" style="display: ''">
+        
+        <h1>Lista de locações</h1>
+        
+        <table border="1" style="width:300px">
+	    <tr>
+                 <td>IdLocacao</td>
+                 <td>IdUsuario</td>
+                 <td>Nome</td>
+                 <td>IdVeiculo</td>
+                 <td>NomeModelo</td>
+                 <td>DataEntrada</td>
+                 <td>DataSaida</td>
+                 <td>Valor</td>
+	    </tr>
+                <tr th:each="itemLocacao : ${ListaLocacoes}">
+                <td th:text="${itemLocacao.IdLocacao}"></td>    
+	        <td th:text="${itemLocacao.IdUsuario}"></td>
+                <td th:text="${itemLocacao.Nome}"></td>
+                <td th:text="${itemLocacao.IdVeiculo}"></td>
+                <td th:text="${itemLocacao.NomeModelo}"></td>
+	        <td th:text="${itemLocacao.DataEntrada}"></td>
+                <td th:text="${itemLocacao.DataSaida}"></td>
+                <td th:text="${itemLocacao.Valor}"></td>
+	    </tr>
+	</table>
+        <p>
+
+            <input type="submit" value="Voltar" 
+            onclick="window.location='http://localhost:8080';" /> 
+            
+            <input type="button" value="Novo" onclick="ExibirInserir()"/>
+                       
+            
+        </p>
+        
+       
+    </div>
+    
+    <div id="inserir" style="display: none;">        
+        
+        <h1>Nova locação</h1>
+          <form action="#" th:action="@{/salvarlocacao}" th:object="${locacao}" method="post">
+              <table>                  
+                  <tr>
+                      <td>Nome cliente</td>
+                      <td> 
+                        <select th:field="*{IdUsuario}">
+                            <option value="">Selecione...</option>
+                            <option th:each="itemCliente : ${ListaClientes}" th:value="${itemCliente.IdCliente}" th:text="${itemCliente.NomeCliente}"></option>
+                        </select>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>Veículo</td>
+                      <td> 
+                        <select th:field="*{IdVeiculo}">
+                            <option value="">Selecione...</option>
+                            <option th:each="itemVeiculo : ${ListaVeiculos}" th:value="${itemVeiculo.IdVeiculo}" th:text="${itemVeiculo.NomeModelo}"></option>
+                        </select>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>Data emprestimo veículo</td>
+                      <td><input type="text" th:field="*{DataEntrada}"/></td>
+                  </tr>
+                  <tr>
+                      <td>Data devolução veículo</td>
+                      <td><input type="text" th:field="*{DataSaida}"/></td>
+                  </tr>
+                  <tr>
+                      <td>Valor</td>
+                      <td><input type="text" th:field="*{Valor}"/></td>
+                  </tr>
+                
+                 
+                  <tr>
+                      <td></td>
+                      
+                      <td>
+                          <input type="button" value="Voltar" onclick="ExibirLista()"/>
+                          <button type="submit">Salvar</button>
+                      </td>
+                  </tr>
+              </table>          
+        </form>
+    </div>
+</body>
+</html>

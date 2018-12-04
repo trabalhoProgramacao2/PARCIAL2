@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>Pratica 2</title> 
+    <meta http-equiv="Content-Type" 
+    	content="text/html; charset=UTF-8" />
+   
+</head>
+<body>
+	<div th:each="erro : ${erros}">
+		<p th:text="${erro}"></p>
+	</div>    
+    
+    <div>
+        
+        <h1>Relatório locações</h1>
+        
+        <table border="1" style="width:300px">
+	    <tr>                 
+                 <td>Nome</td>
+                 <td>NomeModelo</td>
+                 <td>DataEntrada</td>
+                 <td>DataSaida</td>
+                 <td>Valor</td>
+            </tr>
+	   
+            <tr th:each="relatorio : ${ListRelatorio}">                
+                <td th:text="${relatorio.Nome}"></td>
+                <td th:text="${relatorio.NomeModelo}"></td>
+	        <td th:text="${relatorio.DataEntrada}"></td>
+                <td th:text="${relatorio.DataSaida}"></td>
+                <td th:text="${relatorio.Valor}"></td>
+	    </tr>
+	</table>
+        <p>
+            <input type="submit" value="Voltar" onclick="window.location='http://localhost:8080';" />                                 
+        </p>        
+       
+    </div>
+    
+   
+</body>
+</html>

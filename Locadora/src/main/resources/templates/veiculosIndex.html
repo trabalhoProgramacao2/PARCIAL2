@@ -1,0 +1,113 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>Pratica 2</title> 
+    <meta http-equiv="Content-Type" 
+    	content="text/html; charset=UTF-8" />
+    <script>
+        function ExibirInserir(){
+            document.getElementById("inserir").style.display ="";
+            document.getElementById("listar").style.display ="none";
+        }
+        
+        function ExibirLista(){
+            document.getElementById("inserir").style.display ="none";
+            document.getElementById("listar").style.display ="";
+        }
+        
+    </script>
+</head>
+<body>
+	<div th:each="erro : ${erros}">
+		<p th:text="${erro}"></p>
+	</div>
+
+    
+     <div id="inserir" style="display: none;">        
+        
+        <h1>Novo Veículo</h1>
+          <form action="#" th:action="@{/salvarveiculo}" th:object="${veiculo}" method="post">
+              <table>
+                  <tr>
+                      <td>
+                  <label>Fabricante</label>
+                  </td>
+                  <td>
+                <select th:field="*{NomeFabricante}">
+	    	    <option value="">Selecione...</option>
+    			<option th:each="NomeFabricante : ${fabricantes}" th:value="${NomeFabricante}"
+    				th:text="${NomeFabricante}"></option>
+                </select> <br/>
+                </td>
+                </tr>
+                <tr>
+                      <td>Modelo</td>
+                      <td><input type="text" th:field="*{NomeModelo}"/></td>
+                  </tr>
+                  
+                  <tr>
+                      <td>
+                  <label>Cor</label>
+                  </td>
+                  <td>
+                <select th:field="*{IdCor}">
+	    	    <option value="">Selecione...</option>
+    			<option th:each="NomeCor : ${cores}" th:value="${IdCor}"
+    				th:text="${NomeCor}"></option>
+                </select> <br/>
+                </td>
+                </tr>
+                  <tr>
+                      <td>Placa</td>
+                      <td><input type="text" th:field="*{PlacaVeiculo}"/></td>
+                  </tr>
+                  
+                  
+                  <tr>
+                      <td></td>
+                      
+                      <td>
+                          <input type="button" value="Voltar" onclick="ExibirLista()"/>
+                          <button type="submit">Salvar</button>
+                      </td>
+                  </tr>
+              </table>          
+        </form>
+    </div>
+    
+    <div id="listar" style="display: ''">
+        
+        <h1>Lista de veículos</h1>
+        
+        <table border="1" style="width:300px">
+	    <tr>
+                 <td>IdVeiculo</td>
+                 <!--<td>IdModelo</td>-->
+                 <td>NomeModelo</td>
+                 <!--<td>IdFabricante</td>-->
+                 <td>NomeFabricante</td>
+                 <!--<td>IdCor</td>-->
+                 <td>NomeCor</td>
+                 <td>PlacaVeiculo</td>
+	    </tr>
+                <tr th:each="itemVeiculo : ${ListaVeiculos}">
+                <td th:text="${itemVeiculo.IdVeiculo}"></td>    
+	        <!--<td th:text="${itemVeiculo.IdModelo}"></td>-->
+                <td th:text="${itemVeiculo.NomeModelo}"></td>
+                <!--<td th:text="${itemVeiculo.IdFabricante}"></td>-->
+                <td th:text="${itemVeiculo.NomeFabricante}"></td>
+	        <!--<td th:text="${itemVeiculo.IdCor}"></td>-->
+                <td th:text="${itemVeiculo.NomeCor}"></td>
+                <td th:text="${itemVeiculo.PlacaVeiculo}"></td>
+	    </tr>
+	</table>
+        <p>
+
+            <input type="submit" value="Voltar" 
+            onclick="window.location='http://localhost:8080';" /> 
+            
+            <input type="button" value="Novo" onclick="ExibirInserir()"/>
+        </p>
+    </div>
+</body>
+</html>

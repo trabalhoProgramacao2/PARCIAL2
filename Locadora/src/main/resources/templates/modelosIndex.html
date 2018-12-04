@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>Lista de Modelos</title> 
+    <meta http-equiv="Content-Type" 
+    	content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <h1>Lista de modelos</h1>
+    <table border="1" style="width:300px">
+	    <tr>
+                 <td>IdModelo</td>
+                 <td>NomeModelo</td>
+                 <td>IdFabricante</td>
+                 <td>NomeFabricante</td>
+	    </tr>
+                <tr th:each="itemModelo : ${ListaModelos}">
+                <td th:text="${itemModelo.IdModelo}"></td>    
+                <td th:text="${itemModelo.NomeModelo}"></td>
+                <td th:text="${itemModelo.IdFabricante}"></td>
+                <td th:text="${itemModelo.NomeFabricante}"></td>
+	    </tr>
+	</table>
+        <p>
+
+            <input type="submit" value="Voltar" 
+            onclick="window.location='http://localhost:8080';" /> 
+        </p>
+</body>
+</html>

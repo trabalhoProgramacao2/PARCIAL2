@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>Pratica 2</title> 
+    <meta http-equiv="Content-Type" 
+    	content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<div th:each="erro : ${erros}">
+            <p th:text="${erro}"></p>
+	</div>
+    <form action="#" th:action="@{/salvarmodelo}" th:object="${Modelos}" method="post">
+	<label>Nome</label>
+        <input type="text" th:field="*{nome}"/> <br/>	    
+        <label>Ano de Fabricação</label>
+        <input type="text" th:field="*{anoFab}"/> <br/>
+	    
+	  <button type="submit">Salvar</button>
+    </form>
+</body>
+</html>

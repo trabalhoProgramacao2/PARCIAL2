@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>Pratica 2</title> 
+    <meta http-equiv="Content-Type" 
+    	content="text/html; charset=UTF-8" />
+    <script>
+        function ExibirInserir(){
+            document.getElementById("inserir").style.display ="";
+            document.getElementById("listar").style.display ="none";
+        }
+        
+        function ExibirLista(){
+            document.getElementById("inserir").style.display ="none";
+            document.getElementById("listar").style.display ="";
+        }
+        
+    </script>
+</head>
+<body>
+	<div th:each="erro : ${erros}">
+		<p th:text="${erro}"></p>
+	</div>
+    
+    
+    
+    
+    <div id="inserir" style="display: none;">        
+        
+        <h1>Novo Cliente</h1>
+          <form action="#" th:action="@{/salvarcliente}" th:object="${cliente}" method="post">
+              <table>
+                  <tr>
+                      <td>Nome</td>
+                      <td><input type="text" th:field="*{NomeCliente}"/></td>
+                  </tr>
+                  <tr>
+                      <td>CPF</td>
+                      <td><input type="text" th:field="*{CpfCliente}"/></td>
+                  </tr>
+                  <tr>
+                      <td>Telefone</td>
+                      <td><input type="text" th:field="*{TelefoneCliente}"/></td>
+                  </tr>
+                  <tr>
+                      <td></td>
+                      
+                      <td>
+                          <input type="button" value="Voltar" onclick="ExibirLista()"/>
+                          <button type="submit">Salvar</button>
+                      </td>
+                  </tr>
+              </table>          
+        </form>
+    </div>
+    
+    <div id="listar" style="display: ''">
+        
+        <h1>Lista de clientes</h1>
+        
+        <table border="1" style="width:300px">
+	    <tr>
+                <td>Id</td>
+	        <td>Nome</td>
+	        <td>CPF</td>	        
+                <td>Telefone</td>
+	    </tr>
+            
+                <tr th:each="itemCliente : ${ListaClientes}">
+                <td th:text="${itemCliente.IdCliente}"></td>    
+	        <td th:text="${itemCliente.NomeCliente}"></td>
+	        <td th:text="${itemCliente.CpfCliente}"></td>
+                <td th:text="${itemCliente.TelefoneCliente}"></td>
+	    </tr>
+	</table>
+        <p>
+
+            <input type="submit" value="Voltar" 
+            onclick="window.location='http://localhost:8080';" /> 
+            
+            <input type="button" value="Novo" onclick="ExibirInserir()"/>
+        </p>
+    </div>
+    
+  
+</body>
+</html>
